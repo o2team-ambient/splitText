@@ -1,0 +1,9 @@
+{
+  "author": "src",
+  "demoUrl": "http://jdc.jd.com/demo/ambient/splitText/",
+  "title": "splitText",
+  "github": "https://github.com/o2team-ambient/splitText",
+  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-splitText.css?t=1532595940000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\r\n  <div class=\"o2team_ambient_main\">\r\n    <div class=\"font f1\">\r\n      小兔子乖乖,把门儿开开!\r\n    </div>\r\n    <div class=\"font f2\">\r\n      小兔子乖乖,把门儿开开!\r\n    </div>\r\n    <div class=\"font f3\">\r\n      小兔子乖乖,把门儿开开!\r\n    </div>\r\n    <div class=\"font f4\">\r\n      小兔子乖乖,把门儿开开!\r\n    </div>\r\n    <div class=\"font f5\">\r\n      小兔子乖乖,把门儿开开!\r\n    </div>\r\n  </div>\r\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-splitText.js?t=1532595940000\"></script>",
+  "controlUrl": "//storage.jd.com/ambient/control-splitText.js?t=1532595940000",
+  "configUrl": "//storage.jd.com/ambient/config-splitText.js?t=1532595940000"
+}
