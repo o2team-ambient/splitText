@@ -16,9 +16,9 @@ const isLoop = getParameterByName('loop')
 let controlInit = () => {
   // 非必要配置字段（仅用于展示，如背景颜色、启动/暂停）
   class OtherConfig {
-    constructor () {
-      this.message = '挂件名'
-      this.backgroundColor = '#bddaf7'
+    constructor() {
+      this.message = '文字动效'
+      this.backgroundColor = '#000'
       this.play = () => {
         if (!window[O2_AMBIENT_MAIN] || !window[O2_AMBIENT_MAIN].toggle || typeof window[O2_AMBIENT_MAIN].toggle !== 'function') return
         window[O2_AMBIENT_MAIN].toggle()
@@ -28,27 +28,75 @@ let controlInit = () => {
 
   // 主控制面板
   class Control extends Controller {
-    constructor () {
+    constructor() {
       super()
       this.otherConfig = new OtherConfig()
       this.initBaseGUI()
-      this.initTextureGUI()
       this.isShowController && !this.isAmbientPlat && this.setBackgroundColor(this.otherConfig.backgroundColor)
     }
 
-    initBaseGUI () {
+    initBaseGUI() {
       // demo code
       const config = this.config
       const otherConfig = this.otherConfig
       const gui = new dat.GUI()
       gui.addCallbackFunc(this.resetCanvas.bind(this))
-      
+
       gui.add(otherConfig, 'message').name('配置面板')
-      gui.add(otherConfig, 'play').name('播放 / 暂停')
-      config.particleNumber && gui.add(config, 'particleNumber', 3, 100, 1).name('粒子数量').onFinishChange(val => {
-        // window[O2_AMBIENT_INIT]()
+
+      gui.add(config, 'text').name('文字').onFinishChange(val => {
         this.resetCanvas()
       })
+      gui.addColor(config, 'color').name('文字颜色').onFinishChange(val => {
+        this.resetCanvas()
+      })
+      gui.add(config, 'size', 16, 50, 1).name('文字大小').onFinishChange(val => {
+        this.resetCanvas()
+      })
+
+      gui.add(config, 'typeIn', {
+          '类型一': 'type-1',
+          '类型二': 'type-2',
+          '类型三': 'type-3',
+          '类型四': 'type-4',
+          '类型五': 'type-5',
+        })
+        .name('动画进场类型')
+        .onFinishChange(val => {
+          this.resetCanvas()
+        })
+      gui.add(config, 'typeOut', {
+          '类型一': 'type-1',
+          '类型二': 'type-2',
+          '类型三': 'type-3',
+          '类型四': 'type-4',
+        })
+        .name('动画退场类型')
+        .onFinishChange(val => {
+          this.resetCanvas()
+        })
+      gui.add(config, 'posX', 0, window.innerWidth, 10).name('X坐标').onFinishChange(val => {
+        this.resetCanvas()
+      })
+      gui.add(config, 'posY', 0, window.innerHeight, 10).name('Y坐标').onFinishChange(val => {
+        this.resetCanvas()
+      })
+      gui.add(config, 'loop', -1, 100, 1).name('循环次数(无限-1)').onFinishChange(val => {
+        this.resetCanvas()
+      })
+      gui.add(config, 'isLeave').name('是否离场').onFinishChange(val => {
+        this.resetCanvas()
+      })
+      gui.add(config, 'background').name('背景图').onFinishChange(val => {
+        this.resetCanvas()
+      })
+      gui.add(config, 'heightFloor', 0, 100, 1).name('楼层高度').onFinishChange(val => {
+        this.resetCanvas()
+      })
+      gui.add(config, 'duration', 1, 20, 1).name('动效持续时间').onFinishChange(val => {
+        this.resetCanvas()
+      })
+
       this.isShowController && !this.isAmbientPlat && gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
         this.setBackgroundColor(val)
       })
@@ -57,20 +105,20 @@ let controlInit = () => {
       this.setGUIzIndex(2)
     }
 
-    initTextureGUI () {
+    initTextureGUI() {
       // demo code
       const gui = this.gui
       const textures = this.config.textures
-      const texturesFolder = gui.addFolder('纹理')
+      const group = gui.addFolder('文字样式')
       textures && Object.keys(textures).forEach((key, idx) => {
-        const textureController = texturesFolder.add(textures, key).name(`纹理${idx + 1}`)
+        const textureController = group.add(textures, key).name(`纹理${idx + 1}`)
         textureController.onFinishChange(val => {
           this.resetCanvas()
         })
       })
-      texturesFolder.open()
+      group.open()
 
-      this.texturesFolder = texturesFolder
+      this.group = group
     }
   }
 

@@ -5,3 +5,4 @@ node_modules/
 dist/
 plugins/
 package-lock.json
+.vscode/
