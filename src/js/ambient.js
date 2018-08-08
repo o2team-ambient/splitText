@@ -32,12 +32,11 @@ class main {
   }
 
   aniIn(tl, nodes, type) {
-    let d = this.config.duration/10
+    let d = this.config.duration / 10
     switch (type) {
       case 'type-1':
         tl.staggerFrom(nodes, 0.5 * d, { opacity: 0, scale: 0, y: 100 }, 0.05 * d)
         break;
-
 
       case 'type-2':
         tl.staggerFrom(nodes, .5 * d, {
@@ -87,7 +86,7 @@ class main {
   }
 
   aniOut(tl, nodes, type) {
-    let d = this.config.duration/10
+    let d = this.config.duration / 10
 
     switch (type) {
       case 'type-1':
@@ -144,26 +143,53 @@ class main {
   }
 
   clear() {
+    this.styleDom.remove()
     this._dom.remove()
     this._dom = null
   }
   createStyle() {
-    let { size, posX, posY, color, heightFloor } = this.config
+    let { size, posX, posY, color, heightFloor, background } = this.config
 
     let str = `
+      .o2team_ambient_main{
+        height:${heightFloor}px;
+        align-items: center;
+        display:flex;
+      }
       .o2team_ambient_main .font{
+        width:100%;
+        text-align:center;
+        color:${color};
+        font-size: ${size}px;
+      }
+      `
+    if (posX || posY) {
+      str += `
+      .o2team_ambient_main .font{
+        width:auto;
         color:${color};
         left:${posX}px;
         top: ${posY}px;
-        font-size: ${size}px;
-        padding-top:${heightFloor}px;
         position:absolute;
       }
-    `
+      `
+    }
+    if (background) {
+      str += `
+      .o2team_ambient_main{
+        background-image:url(${background});
+        background-position:center;
+        background-size:100% auto;
+        background-repeat:no-repeat;
+      }
+      `
+    }
+
+
     let styleDom = document.createElement('style')
     styleDom.innerHTML = str
+    this.styleDom = styleDom
     this.wrapper.appendChild(styleDom)
-
   }
   create() {
     let config = this.config

@@ -75,10 +75,10 @@ let controlInit = () => {
         .onFinishChange(val => {
           this.resetCanvas()
         })
-      gui.add(config, 'posX', 0, window.innerWidth, 10).name('X坐标').onFinishChange(val => {
+      gui.add(config, 'posX', 0, window.innerWidth, 1).name('X坐标').onFinishChange(val => {
         this.resetCanvas()
       })
-      gui.add(config, 'posY', 0, window.innerHeight, 10).name('Y坐标').onFinishChange(val => {
+      gui.add(config, 'posY', 0, window.innerHeight, 1).name('Y坐标').onFinishChange(val => {
         this.resetCanvas()
       })
       gui.add(config, 'loop', -1, 100, 1).name('循环次数(无限-1)').onFinishChange(val => {
@@ -90,7 +90,7 @@ let controlInit = () => {
       gui.add(config, 'background').name('背景图').onFinishChange(val => {
         this.resetCanvas()
       })
-      gui.add(config, 'heightFloor', 0, 100, 1).name('楼层高度').onFinishChange(val => {
+      gui.add(config, 'heightFloor', 0, 1000, 1).name('楼层高度').onFinishChange(val => {
         this.resetCanvas()
       })
       gui.add(config, 'duration', 1, 20, 1).name('动效持续时间').onFinishChange(val => {
