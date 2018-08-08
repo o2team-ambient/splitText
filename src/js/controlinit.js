@@ -50,7 +50,7 @@ let controlInit = () => {
       gui.addColor(config, 'color').name('文字颜色').onFinishChange(val => {
         this.resetCanvas()
       })
-      gui.add(config, 'size', 16, 50, 1).name('文字大小').onFinishChange(val => {
+      gui.add(config, 'size', 16, 100, 1).name('文字大小').onFinishChange(val => {
         this.resetCanvas()
       })
 
