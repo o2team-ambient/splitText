@@ -3,7 +3,7 @@
   "demoUrl": "http://jdc.jd.com/demo/ambient/splitText/",
   "title": "splitText",
   "github": "https://github.com/o2team-ambient/splitText",
-  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-splitText.css?t=1533704374000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\r\n  <div class=\"o2team_ambient_main\"></div>\r\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-splitText.js?t=1533704374000\"></script>",
-  "controlUrl": "//storage.jd.com/ambient/control-splitText.js?t=1533704374000",
-  "configUrl": "//storage.jd.com/ambient/config-splitText.js?t=1533704374000"
+  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-splitText.css?t=1547713990000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\"></div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-splitText.js?t=1547713990000\"></script>",
+  "controlUrl": "//storage.jd.com/ambient/control-splitText.js?t=1547713990000",
+  "configUrl": "//storage.jd.com/ambient/config-splitText.js?t=1547713990000"
 }
