@@ -11,9 +11,9 @@ import { TimelineMax } from 'gsap'
 
 // 判断是否可点，被点中则隐藏
 const wrapper = document.querySelector('.o2team_ambient_main')
-wrapper.addEventListener('click', () => {
-  wrapper.style.display = 'none'
-})
+// wrapper.addEventListener('click', () => {
+//   wrapper.style.display = 'none'
+// })
 
 function range(min, max) {
   return min + Math.random() * (max - min);
@@ -22,10 +22,19 @@ function range(min, max) {
 class main {
   constructor() {
     this.wrapper = wrapper
+    this.nodes = []
+    this._dom=[]
     this.copyConfig()
     this.createStyle()
-    this.create(this.config.text)
+    this.createText()
     this.ani()
+  }
+  createText() {
+    this.text = this.config.text
+    for (let i = 0; i < this.text.length; i++) {
+      this.create(this.text[i],i)
+      this.nodes[i] = new splitText(this._dom[i])
+    }
   }
   copyConfig() {
     this.config = JSON.parse(JSON.stringify(window[O2_AMBIENT_CONFIG]))
@@ -82,6 +91,9 @@ class main {
       case 'type-5':
         tl.staggerFrom(nodes, 0.2 * d, { opacity: 0, scaleX: -1, cycle: { x: [-100, -250] } }, 0.05 * d)
         break;
+      case 'type-6':
+        tl.staggerFrom(nodes, 0.02 * d, { opacity: 0 }, 0)
+        break;
     }
   }
 
@@ -105,13 +117,13 @@ class main {
         tl.staggerTo(nodes, 2 * d, {
           opacity: 0,
           cycle: {
-            rotation: function() {
+            rotation: function () {
               return range(-2000, 2000);
             },
-            x: function() {
+            x: function () {
               return range(-500, 500);
             },
-            y: function() {
+            y: function () {
               return range(-200, 500);
             },
           }
@@ -130,22 +142,31 @@ class main {
           opacity: 0
         }, 0.01 * d, '-=0.05')
         break;
+      case 'type-5':
+        tl.staggerTo(nodes, 0.02 * d, { opacity: 0 }, 0, `+=${d}`)
+        break;
     }
   }
 
   ani() {
     let tl = new TimelineMax({ repeat: this.config.loop })
-    let nodes = new splitText(this._dom)
+    this.tl = tl
+    for (let i = 0; i < this.nodes.length; i++) {
+      this.aniIn(tl, this.nodes[i], this.config.typeIn)
 
-    this.aniIn(tl, nodes, this.config.typeIn)
+      this.config.isLeave && this.aniOut(tl, this.nodes[i], this.config.typeOut)
 
-    this.config.isLeave && this.aniOut(tl, nodes, this.config.typeOut)
+    }
   }
 
   clear() {
     this.styleDom.remove()
-    this._dom.remove()
-    this._dom = null
+    for (let i=0;i<this._dom.length;i++){
+      this._dom[i].remove()
+      this._dom[i] = null
+    }
+    this.nodes = []
+    this.tl.kill()
   }
   createStyle() {
     let { size, posX, posY, color, heightFloor, background } = this.config
@@ -157,8 +178,8 @@ class main {
         display:flex;
       }
       .o2team_ambient_main .font{
-        width:100%;
-        text-align:center;
+        width:${this.config.width}px;
+        text-align:${this.config.align};
         color:${color};
         font-size: ${size}px;
       }
@@ -166,7 +187,6 @@ class main {
     if (posX || posY) {
       str += `
       .o2team_ambient_main .font{
-        width:auto;
         color:${color};
         left:${posX}px;
         top: ${posY}px;
@@ -191,21 +211,20 @@ class main {
     this.styleDom = styleDom
     this.wrapper.appendChild(styleDom)
   }
-  create() {
+  create(text,i) {
     let config = this.config
     let div = document.createElement('div')
     div.setAttribute('class', 'font')
-    div.innerHTML = config.text
-    this._dom = div
+    div.innerHTML = text
+    this._dom[i] = div
     this.wrapper.appendChild(div)
   }
-
   reset() {
     this.copyConfig()
 
     this.clear()
     this.createStyle()
-    this.create()
+    this.createText()
 
     this.ani()
 

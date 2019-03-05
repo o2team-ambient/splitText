@@ -44,37 +44,54 @@ let controlInit = () => {
 
       gui.add(otherConfig, 'message').name('配置面板')
 
-      gui.add(config, 'text').name('文字').onFinishChange(val => {
-        this.resetCanvas()
-      })
+      // gui.add(config, 'text').name('文字').onFinishChange(val => {
+      //   this.resetCanvas()
+      // })
       gui.addColor(config, 'color').name('文字颜色').onFinishChange(val => {
         this.resetCanvas()
       })
       gui.add(config, 'size', 16, 100, 1).name('文字大小').onFinishChange(val => {
         this.resetCanvas()
       })
+      gui.add(config, 'width', 0, window.innerWidth, 1).name('文字容器宽度').onFinishChange(val => {
+        this.resetCanvas()
+      })
+
+      gui.add(config, 'align', {
+        '居中对齐': 'center',
+        '靠左对齐': 'left',
+        '靠右对齐': 'right',
+      })
+      .name('文字对齐方式')
+      .onFinishChange(val => {
+        this.resetCanvas()
+      })
 
       gui.add(config, 'typeIn', {
-          '类型一': 'type-1',
-          '类型二': 'type-2',
-          '类型三': 'type-3',
-          '类型四': 'type-4',
-          '类型五': 'type-5',
-        })
-        .name('动画进场类型')
-        .onFinishChange(val => {
-          this.resetCanvas()
-        })
+        '类型一': 'type-1',
+        '类型二': 'type-2',
+        '类型三': 'type-3',
+        '类型四': 'type-4',
+        '类型五': 'type-5',
+        '类型六': 'type-6',
+      })
+      .name('动画进场类型')
+      .onFinishChange(val => {
+        this.resetCanvas()
+      })
+
       gui.add(config, 'typeOut', {
-          '类型一': 'type-1',
-          '类型二': 'type-2',
-          '类型三': 'type-3',
-          '类型四': 'type-4',
-        })
-        .name('动画退场类型')
-        .onFinishChange(val => {
-          this.resetCanvas()
-        })
+        '类型一': 'type-1',
+        '类型二': 'type-2',
+        '类型三': 'type-3',
+        '类型四': 'type-4',
+        '类型五': 'type-5',
+      })
+      .name('动画退场类型')
+      .onFinishChange(val => {
+        this.resetCanvas()
+      })
+      
       gui.add(config, 'posX', 0, window.innerWidth, 1).name('X坐标').onFinishChange(val => {
         this.resetCanvas()
       })
