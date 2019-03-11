@@ -43,10 +43,11 @@ let controlInit = () => {
       gui.addCallbackFunc(this.resetCanvas.bind(this))
 
       gui.add(otherConfig, 'message').name('配置面板')
-
-      // gui.add(config, 'text').name('文字').onFinishChange(val => {
-      //   this.resetCanvas()
-      // })
+      let f1=gui.addFolder('text')
+      
+      f1.addGroup(config, 'text').name('文字列表').onFinishChange(val => {
+        this.resetCanvas()
+      })
       gui.addColor(config, 'color').name('文字颜色').onFinishChange(val => {
         this.resetCanvas()
       })
@@ -56,7 +57,6 @@ let controlInit = () => {
       gui.add(config, 'width', 0, window.innerWidth, 1).name('文字容器宽度').onFinishChange(val => {
         this.resetCanvas()
       })
-
       gui.add(config, 'align', {
         '居中对齐': 'center',
         '靠左对齐': 'left',
