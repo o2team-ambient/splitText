@@ -1,6 +1,7 @@
 {
   "author": "src",
   "demoUrl": "http://jdc.jd.com/demo/ambient/splitText/",
+  "miniDemoUrl":"http://jdc.jd.com/demo/ambient/splitText/index_demo.html",
   "title": "splitText",
   "ambName": "文字动效",
   "github": "https://github.com/o2team-ambient/splitText",
