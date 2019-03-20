@@ -1,7 +1,7 @@
 {
   "author": "lison",
-  "demoUrl": "http://jdc.jd.com/demo/ambient/splitText/",
-  "miniDemoUrl":"http://jdc.jd.com/demo/ambient/splitText/index_demo.html",
+  "demoUrl": "//o2team-ambient.github.io/splitText/dist/",
+  "miniDemoUrl":"//o2team-ambient.github.io/splitText/dist/index_demo.html",
   "title": "splitText",
   "ambName": "文字动效",
   "github": "https://github.com/o2team-ambient/splitText",
