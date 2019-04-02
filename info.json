@@ -5,9 +5,9 @@
   "title": "splitText",
   "ambName": "文字动效",
   "github": "https://github.com/o2team-ambient/splitText",
-  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-splitText.css?t=1547713990000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\"></div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-splitText.js?t=1547713990000\"></script>",
-  "controlUrl": "//storage.jd.com/ambient/control-splitText.js?t=1547713990000",
-  "configUrl": "//storage.jd.com/ambient/config-splitText.js?t=1547713990000",
-  "placeholderImg": "//storage.jd.com/ambient/splitText_placeholder.png?t=1554087556000",
-  "gifImg": "//storage.jd.com/ambient/splitText_motion.gif?t=1554087556000"
+  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-splitText.css?t=1554188223000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\"></div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-splitText.js?t=1554188223000\"></script>",
+  "controlUrl": "//storage.jd.com/ambient/control-splitText.js?t=1554188223000",
+  "configUrl": "//storage.jd.com/ambient/config-splitText.js?t=1554188223000",
+  "placeholderImg": "//storage.jd.com/ambient/splitText_placeholder.png?t=1554188280000",
+  "gifImg": "//storage.jd.com/ambient/splitText_motion.gif?t=1554188280000"
 }

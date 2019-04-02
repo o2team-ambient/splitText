@@ -20,27 +20,56 @@ function range(min, max) {
 }
 
 class main {
-  constructor() {
+  wrapper
+  nodes
+  _dom
+  resizeSto
+  ratio
+  imgEle
+
+  constructor () {
     this.wrapper = wrapper
     this.nodes = []
     this._dom=[]
+    this.ratio = this.getRatio()
     this.copyConfig()
     this.createStyle()
     this.createText()
     this.ani()
+    this.bindResize()
   }
-  createText() {
+
+  bindResize () {
+    window.addEventListener('resize', () => {
+      if (this.resizeSto) return
+      this.ratio = this.getRatio()
+      console.log(this.ratio)
+      this.reset()
+
+      this.resizeSto = setTimeout(() => {
+        clearTimeout(this.resizeSto)
+        this.resizeSto = null
+      }, 200)
+    })
+  }
+
+  getRatio () {
+    return document.documentElement.clientWidth / 1200
+  }
+
+  createText () {
     this.text = this.config.text
     for (let i = 0; i < this.text.length; i++) {
       this.create(this.text[i],i)
       this.nodes[i] = new splitText(this._dom[i])
     }
   }
-  copyConfig() {
+
+  copyConfig () {
     this.config = JSON.parse(JSON.stringify(window[O2_AMBIENT_CONFIG]))
   }
 
-  aniIn(tl, nodes, type) {
+  aniIn (tl, nodes, type) {
     let d = this.config.duration / 10
     switch (type) {
       case 'type-1':
@@ -71,14 +100,14 @@ class main {
           // e.style.letterSpacing = '10px'
         })
         nodes.forEach((e) => {
-          e.style.left = e.style._left + 'px'
-          e.style.top = e.style._top + 'px'
-          e.style.height = '30px'
-          e.style.width = '5px'
+          e.style.left = `${e.style._left * this.ratio}px`
+          e.style.top = `${e.style._top * this.ratio}px`
+          e.style.height = `${30 * this.ratio}px`
+          e.style.width = `${5 * this.ratio}px`
           e.style.position = 'absolute'
         })
         tl.staggerFrom(nodes, .5 * d, {
-          x: -500,
+          x: -500 * this.ratio,
           opacity: 0,
         }, 0.01 * d)
         tl.staggerTo(nodes, 0.2 * d, {
@@ -89,7 +118,7 @@ class main {
         break;
 
       case 'type-5':
-        tl.staggerFrom(nodes, 0.2 * d, { opacity: 0, scaleX: -1, cycle: { x: [-100, -250] } }, 0.05 * d)
+        tl.staggerFrom(nodes, 0.2 * d, { opacity: 0, scaleX: -1, cycle: { x: [-100 * this.ratio, -250 * this.ratio] } }, 0.05 * d)
         break;
       case 'type-6':
         tl.staggerFrom(nodes, 0.02 * d, { opacity: 0 }, 0)
@@ -97,18 +126,18 @@ class main {
     }
   }
 
-  aniOut(tl, nodes, type) {
+  aniOut (tl, nodes, type) {
     let d = this.config.duration / 10
 
     switch (type) {
       case 'type-1':
-        tl.staggerTo(nodes, 0.2 * d, { opacity: 0, scaleX: -1, x: -15 }, 0.1 * d, "+=2")
+        tl.staggerTo(nodes, 0.2 * d, { opacity: 0, scaleX: -1, x: -15 * this.ratio }, 0.1 * d, "+=2")
         break;
 
       case 'type-2':
         tl.staggerTo(nodes, 0.5 * d, {
           opacity: 0,
-          y: 50,
+          y: 50 * this.ratio,
           ease: Back.easeIn.config(8),
         }, 0.1 * d, '+=1')
         break;
@@ -118,13 +147,13 @@ class main {
           opacity: 0,
           cycle: {
             rotation: function () {
-              return range(-2000, 2000);
+              return range(-2000, 2000) * this.ratio;
             },
             x: function () {
-              return range(-500, 500);
+              return range(-500, 500) * this.ratio;
             },
             y: function () {
-              return range(-200, 500);
+              return range(-200, 500) * this.ratio;
             },
           }
         }, 0.015 * d, "+=1");
@@ -132,13 +161,13 @@ class main {
 
       case 'type-4':
         tl.staggerTo(nodes, 0.02 * d, {
-          height: '30',
-          width: '5',
+          height: `${30 * this.ratio}`,
+          width: `${5 * this.ratio}`,
           background: this.config.color
         }, 0.02 * d, '+=1')
 
         tl.staggerTo(nodes, 0.5 * d, {
-          x: 500,
+          x: 500 * this.ratio,
           opacity: 0
         }, 0.01 * d, '-=0.05')
         break;
@@ -148,7 +177,7 @@ class main {
     }
   }
 
-  ani() {
+  ani () {
     let tl = new TimelineMax({ repeat: this.config.loop })
     this.tl = tl
     for (let i = 0; i < this.nodes.length; i++) {
@@ -159,7 +188,7 @@ class main {
     }
   }
 
-  clear() {
+  clear () {
     this.styleDom.remove()
     for (let i=0;i<this._dom.length;i++){
       this._dom[i].remove()
@@ -168,41 +197,42 @@ class main {
     this.nodes = []
     this.tl.kill()
   }
-  createStyle() {
+  createStyle () {
     let { size, posX, posY, color, heightFloor, background } = this.config
 
     let str = `
       .o2team_ambient_main{
-        height:${heightFloor}px;
-        align-items: center;
-        display:flex;
+        height:${heightFloor * this.ratio}px;
       }
       .o2team_ambient_main .font{
-        width:${this.config.width}px;
+        width:${this.config.width * this.ratio}px;
         text-align:${this.config.align};
         color:${color};
-        font-size: ${size}px;
+        font-size: ${size * this.ratio}px;
       }
       `
     if (posX || posY) {
       str += `
       .o2team_ambient_main .font{
         color:${color};
-        left:${posX}px;
-        top: ${posY}px;
+        left:${posX * this.ratio}px;
+        top: ${posY * this.ratio}px;
         position:absolute;
       }
       `
     }
     if (background) {
-      str += `
-      .o2team_ambient_main{
-        background-image:url(${background});
-        background-position:center;
-        background-size:100% auto;
-        background-repeat:no-repeat;
+      if (!this.imgEle) {
+        this.imgEle = document.createElement('img')
+        this.wrapper.appendChild(this.imgEle)
       }
-      `
+      this.imgEle.setAttribute('src', background)
+      this.imgEle.setAttribute('style', 'width: 100%;display: block;')
+    } else {
+      if (this.imgEle) {
+        this.imgEle.remove()
+        this.imgEle = null
+      }
     }
 
 
@@ -211,7 +241,7 @@ class main {
     this.styleDom = styleDom
     this.wrapper.appendChild(styleDom)
   }
-  create(text,i) {
+  create (text,i) {
     let config = this.config
     let div = document.createElement('div')
     div.setAttribute('class', 'font')
@@ -219,7 +249,7 @@ class main {
     this._dom[i] = div
     this.wrapper.appendChild(div)
   }
-  reset() {
+  reset () {
     this.copyConfig()
 
     this.clear()
