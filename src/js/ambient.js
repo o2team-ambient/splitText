@@ -8,24 +8,25 @@ import {
 import splitText from './utils/splitText'
 import { TimelineMax } from 'gsap'
 
-
-// 判断是否可点，被点中则隐藏
-const wrapper = document.querySelector('.o2team_ambient_main')
-// wrapper.addEventListener('click', () => {
-//   wrapper.style.display = 'none'
-// })
+let wrapper = document.querySelector('.o2team_ambient_main')
+if (!wrapper) {
+  wrapper = document.createElement('div')
+  wrapper.setAttribute('class', 'o2team_ambient_main')
+  wrapper.setAttribute('id', 'o2team_ambient_main')
+  document.body.insertAdjacentElement('beforeend', wrapper)
+}
 
 function range(min, max) {
   return min + Math.random() * (max - min);
 }
 
 class main {
-  wrapper
-  nodes
-  _dom
-  resizeSto
-  ratio
-  imgEle
+  // wrapper = null
+  // nodes = null
+  // _dom = null
+  // resizeSto = null
+  // ratio = null
+  // imgEle = null
 
   constructor () {
     this.wrapper = wrapper
@@ -263,7 +264,7 @@ class main {
 }
 
 // 初始化函数
-function initAmbient() {
+export default function initAmbient() {
   // let xxx = new XXX()
   // 主函数暴露
   window[O2_AMBIENT_MAIN] = new main()
@@ -271,14 +272,3 @@ function initAmbient() {
 
 // 初始化函数
 window[O2_AMBIENT_INIT] = initAmbient
-
-try {
-  // 保证配置读取顺序
-  let csi = setInterval(() => {
-    if (!window[O2_AMBIENT_CONFIG]) return
-    clearInterval(csi)
-    initAmbient()
-  }, 1000)
-} catch (e) {
-  console.log(e)
-}
