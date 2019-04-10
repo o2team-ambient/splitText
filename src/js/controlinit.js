@@ -57,7 +57,7 @@ let controlInit = () => {
 
       let f1=gui.addFolder('文案配置')
       
-      f1.addGroup(config, 'text').name('文字列表').onFinishChange(val => {
+      f1.addGroup(config, 'text').name('文案列表').onFinishChange(val => {
         this.resetCanvas()
       })
       f1.open()
@@ -75,7 +75,7 @@ let controlInit = () => {
           '果冻甩': 'type-3',
           '左侧竖线滑出': 'type-4',
           '左侧翻转滑出': 'type-5',
-          '无': 'type-6',
+          '无': 'type-6'
         })
         .name('进场动画')
         .onFinishChange(val => {
@@ -87,7 +87,7 @@ let controlInit = () => {
           '弹跳向下': 'type-2',
           '打散': 'type-3',
           '竖线右侧滑出': 'type-4',
-          '无': 'type-5',
+          '无': 'type-5'
         })
         .name('退场动画')
         .onFinishChange(val => {
@@ -96,7 +96,7 @@ let controlInit = () => {
 
       this.aniFolder
         .add(config, 'loop', -1, 100, 1)
-        .name('循环次数(无限-1)')
+        .name('循环次数（-1为无限次）')
         .onFinishChange(val => {
           this.resetCanvas()
         })

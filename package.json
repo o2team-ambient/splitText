@@ -1,6 +1,6 @@
 {
   "name": "@o2team/ambient-splitText",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "夸克动效库-文字转场",
   "main": "dist/index.min.js",
   "scripts": {
