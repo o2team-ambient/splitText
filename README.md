@@ -1,11 +1,11 @@
 ## 使用方法
 
 ```
-jnpm i @o2team/ambient-splitText --save
+jnpm i @o2team/ambient-split_text --save
 ```
 
 ```javascript
-import ATAmbient from '@o2team/ambient-splitText'
+import ATAmbient from '@o2team/ambient-split_text'
 
 ATAmbient({
   text: ['每满99减50','测试测试测试哦'],
@@ -44,7 +44,7 @@ ATAmbient({
 
 ## 预览地址
 
-https://o2team-ambient.github.io/splitText/dist/?controller=1
+https://o2team-ambient.github.io/split_text/dist/?controller=1
 
 ## 项目结构
 
