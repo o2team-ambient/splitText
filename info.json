@@ -5,9 +5,9 @@
   "title": "split_text",
   "ambName": "文字动效",
   "github": "https://github.com/o2team-ambient/split_text",
-  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-split_text.css?t=1565788371000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\"></div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-split_text.js?t=1565788371000\"></script>",
-  "controlUrl": "//storage.jd.com/ambient/control-split_text.js?t=1565788371000",
-  "configUrl": "//storage.jd.com/ambient/config-split_text.js?t=1565788371000",
+  "demoSnippet": "<link href=\"//storage.jd.com/ambient/styles-split_text.css?t=1566464234000\" rel=\"stylesheet\"></link><!-- S 主体内容 -->\n  <div class=\"o2team_ambient_main\"></div>\n  <!-- E 主体内容 --><script src=\"//storage.jd.com/ambient/bundle-split_text.js?t=1566464234000\"></script>",
+  "controlUrl": "//storage.jd.com/ambient/control-split_text.js?t=1566464234000",
+  "configUrl": "//storage.jd.com/ambient/config-split_text.js?t=1566464234000",
   "placeholderImg": "//storage.jd.com/ambient/splitText_placeholder.png?t=1554278942000",
   "spriteImg": "//storage.jd.com/ambient/splitText_sprite.png?t=1554278942000"
 }
