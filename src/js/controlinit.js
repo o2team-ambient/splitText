@@ -5,19 +5,33 @@
 
 import dat from '@o2team/ambient-dat.gui'
 import {
-  O2_AMBIENT_MAIN
+  O2_AMBIENT_MAIN,
+  O2_AMBIENT_CONFIG,
+  O2_AMBIENT_CLASSNAME
 } from './utils/const'
 import Controller from './utils/controller'
 import { getParameterByName } from './utils/util'
+import processLocalConfig from './utils/processLocalConfig'
+
+import configKeys from './configs/keys'
+
 
 /* eslint-disable no-unused-vars */
 const isLoop = getParameterByName('loop')
+const configKeyVal = getParameterByName('configKey')
+const configKey = configKeys[configKeyVal] || configKeys['default']
+
+const loadData = {
+  "默认": {
+    "0": {...window[O2_AMBIENT_CONFIG]}
+  }
+}
+const allLoadData = processLocalConfig({ configKey, guiName: O2_AMBIENT_CLASSNAME, loadData })
 
 let controlInit = () => {
   // 非必要配置字段（仅用于展示，如背景颜色、启动/暂停）
   class OtherConfig {
     constructor() {
-      this.message = '文字动效'
       this.backgroundColor = '#000'
       this.play = () => {
         if (!window[O2_AMBIENT_MAIN] || !window[O2_AMBIENT_MAIN].toggle || typeof window[O2_AMBIENT_MAIN].toggle !== 'function') return
@@ -46,10 +60,15 @@ let controlInit = () => {
       // demo code
       const config = this.config
       const otherConfig = this.otherConfig
-      const gui = new dat.GUI()
+      const gui = new dat.GUI({
+        name: O2_AMBIENT_CLASSNAME,
+        preset: configKey,
+        load: {
+          "remembered": { ...allLoadData.remembered }
+        }
+      })
+      gui.remember(config)
       gui.addCallbackFunc(this.resetCanvas.bind(this))
-
-      gui.add(otherConfig, 'message').name('配置面板')
 
       this.isShowController && !this.isAmbientPlat && gui.addColor(otherConfig, 'backgroundColor').name('背景色(仅演示)').onFinishChange(val => {
         this.setBackgroundColor(val)
